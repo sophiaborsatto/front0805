@@ -9,7 +9,7 @@ const botao = document.getElementById('btnCadastrar');
 // cadastrar
 botao.addEventListener('click',
     function () {
-        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || []; //localStorage é uma memória do computador
         const usuario = {
             login: document.getElementById('login').value,
             senha: document.getElementById('senha').value
@@ -30,7 +30,8 @@ function listar(){
     const tabelaListaUsuarios = document.getElementById('listaUsuarios');
     tabelaListaUsuarios.innerHTML = "";
 
-    listaUsuarioCad.forEach((usuario, index) => {
+    //forEach percorrendo o vetor e apresentando Login e Senha 
+    listaUsuarioCad.forEach((usuario, index) => { //função for que percorre o vetor (para cada)
         const linha = document.createElement('tr');
         linha.innerHTML = `
             <td>${usuario.login}</td>
@@ -54,7 +55,14 @@ function excluirUsuario(index){
         localStorage.setItem("usuarios", listaJson);
         listar();
     }
-    
+}
+
+function editarUsuario(index){
+    const listaUsuariosCadastrados = JSON.parse(localStorage.getItem("usuarios"))||[];
+    const usuario = listaUsuariosCadastrados[index];
+    document.getElementById('login').value = usuario.login;
+    document.getElementById('senha').value = usuario.senha;
+    document.getElementById('indexEditar').value = index;
 }
 
 listar();
