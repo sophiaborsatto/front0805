@@ -4,7 +4,6 @@
 
 // cadastro 
 const botao = document.getElementById('btnCadastrar');
-//let usuarios = [];
 
 // cadastrar
 botao.addEventListener('click',
@@ -14,7 +13,15 @@ botao.addEventListener('click',
             login: document.getElementById('login').value,
             senha: document.getElementById('senha').value
         }
-        usuarios.push(usuario);
+
+        const indexEditando = document.getElementById('indexEditar').value;
+        if(indexEditando !== ""){
+            usuarios[indexEditando] = usuario;
+            document.getElementById('indexEditar').value = "";
+        }else{
+            usuarios.push(usuario);
+        }
+        
         let listaUsuarios = JSON.stringify(usuarios);
         localStorage.setItem("usuarios", listaUsuarios);
         document.getElementById('login').value = '';
